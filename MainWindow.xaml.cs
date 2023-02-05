@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Linq;
 using WorkHoursRecorder.Helpers;
@@ -34,6 +35,7 @@ public sealed partial class MainWindow : Window {
 	}
 
 	public void Intialize() {
+		MainFrame.BackStack.Clear();
 		RootNavigation.SelectedItem = RootNavigation.MenuItems.First();
 		MainDatePicker.SelectedDate = new DateTimeOffset(DateTime.Today);
 		RootNavigation.IsEnabled = true;
@@ -102,5 +104,16 @@ public sealed partial class MainWindow : Window {
 		};
 		await dialog.ShowAsync();
 
+	}
+
+	private void RootNavigation_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) {
+		if (!MainFrame.CanGoBack) {
+			return;
+		}
+		MainFrame.GoBack();
+	}
+
+	private void MainFrame_Navigated(object sender, NavigationEventArgs e) {
+		RootNavigation.IsBackEnabled = MainFrame.CanGoBack;
 	}
 }

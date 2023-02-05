@@ -20,7 +20,7 @@
 			<TextBlock x:Name="AppTitleTextBlock" Text="Work Hour Recorder" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center" Margin="32,0,0,0"/>
 		</Grid>
 		<Grid Grid.Row="1">
-			<NavigationView x:Name="RootNavigation" PaneDisplayMode="Top" SelectionChanged="RootNavigation_SelectionChanged" IsEnabled="False">
+			<NavigationView x:Name="RootNavigation" PaneDisplayMode="Top" IsBackEnabled="False" IsBackButtonVisible="Collapsed" BackRequested="RootNavigation_BackRequested" SelectionChanged="RootNavigation_SelectionChanged" IsEnabled="False">
 				<NavigationView.MenuItems>
 					<NavigationViewItem Icon="Calendar" Content="Calendar" Tag="0"/>
 				</NavigationView.MenuItems>
@@ -46,7 +46,7 @@
 					</StackPanel>
 				</NavigationView.PaneFooter>
 				<NavigationView.Content>
-					<Frame x:Name="MainFrame">
+					<Frame x:Name="MainFrame" Navigated="MainFrame_Navigated">
 						<Frame.ContentTransitions>
 							<TransitionCollection>
 								<NavigationThemeTransition/>
