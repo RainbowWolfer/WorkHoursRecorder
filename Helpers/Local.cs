@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using WorkHoursRecorder.Models;
@@ -63,5 +60,13 @@ public static class Local {
 			File = await LocalFolder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists);
 		}
 		return File;
+	}
+
+	public static string InfoToJson() {
+		return JsonConvert.SerializeObject(Info, Formatting.Indented);
+	}
+
+	public static WorkDayInfo? JsonToInfo(string json) {
+		return JsonConvert.DeserializeObject<WorkDayInfo?>(json);
 	}
 }

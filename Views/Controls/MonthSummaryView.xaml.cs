@@ -1,18 +1,18 @@
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WorkHoursRecorder.Helpers;
 using WorkHoursRecorder.Models;
 
 namespace WorkHoursRecorder.Views.Controls {
 	public sealed partial class MonthSummaryView : UserControl {
-		public List<Pair<Date, List<WorkTimeSpan>>> Days { get; }
-		public MonthSummaryView(List<Pair<Date, List<WorkTimeSpan>>> days) {
+		public MonthSummaryView(DateTimeOffset date, List<Pair<Date, List<WorkTimeSpan>>> days) {
 			this.InitializeComponent();
-			Days = days;
 
-			int daysCount = Days.Count;
+			DateText.Text = $"{date.Year}-{date.Month.ToDuo()}";
+
+			int daysCount = days.Count;
 			double hoursCount = 0;
 			foreach (Pair<Date, List<WorkTimeSpan>> day in days) {
 				double hours = day.Value.Sum(x => x.GetSpan());

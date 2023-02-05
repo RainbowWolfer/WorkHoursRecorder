@@ -3,23 +3,11 @@
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using WorkHoursRecorder.Helpers;
-using WorkHoursRecorder.Models;
 using WorkHoursRecorder.Views.Controls;
 using WorkHoursRecorder.Views.Pages;
 
@@ -109,7 +97,7 @@ public sealed partial class MainWindow : Window {
 			Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
 			Title = "Month Summary",
 			CloseButtonText = "Back",
-			Content = new MonthSummaryView(Local.GetWorkDaysInMonth(date.Value.Year, date.Value.Month)),
+			Content = new MonthSummaryView(date.Value, Local.GetWorkDaysInMonth(date.Value.Year, date.Value.Month)),
 		};
 		await dialog.ShowAsync();
 

@@ -8,15 +8,54 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+	<Page.Resources>
+		<Style x:Key="BackgroundBorder" TargetType="Border">
+			<Setter Property="CornerRadius" Value="10"/>
+			<Setter Property="Background" Value="#2d545454"/>
+			<Setter Property="Padding" Value="15,5,15,5"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+		</Style>
+	</Page.Resources>
+
 	<Grid>
-		<StackPanel Margin="10" VerticalAlignment="Center">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<FontIcon Glyph="&#xE121;" FontSize="32" VerticalAlignment="Center" Margin="0,5,10,0"/>
-				<TextBlock Text="Work Hour Recorder" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center"/>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<TextBlock Text="Made by" FontSize="16" VerticalAlignment="Center"/>
-				<HyperlinkButton Padding="6,2,6,2" Content="RainbowWolfer" FontSize="16" Margin="5,0,0,0" VerticalAlignment="Center" NavigateUri="https://rainbowwolfer.github.io/"/>
+		<StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<Border Style="{StaticResource BackgroundBorder}" Padding="30,10,30,10">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+					<FontIcon Glyph="&#xE121;" FontSize="32" VerticalAlignment="Center" Margin="0,5,10,0"/>
+					<TextBlock Text="Work Hour Recorder" FontSize="32" FontWeight="SemiBold" VerticalAlignment="Center"/>
+				</StackPanel>
+			</Border>
+			<Border Style="{StaticResource BackgroundBorder}">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+					<TextBlock Text="Made by" FontSize="16" VerticalAlignment="Center"/>
+					<HyperlinkButton Padding="6,2,6,2" Content="RainbowWolfer" FontSize="16" Margin="5,0,0,0" VerticalAlignment="Center" NavigateUri="https://rainbowwolfer.github.io/"/>
+				</StackPanel>
+			</Border>
+			<Border Style="{StaticResource BackgroundBorder}">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+					<TextBlock Text="Project Source" FontSize="16" VerticalAlignment="Center"/>
+					<HyperlinkButton Padding="6,2,6,2" FontSize="16" Margin="5,0,0,0" VerticalAlignment="Center" NavigateUri="https://github.com/RainbowWolfer/WorkHoursRecorder">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="Github"/>
+							<Image Source="/Resources/Icons/Github.png" Height="20" Margin="10,0,0,0"/>
+						</StackPanel>
+					</HyperlinkButton>
+				</StackPanel>
+			</Border>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+				<Button x:Name="ExportButton" CornerRadius="10" Margin="0,0,5,0" ToolTipService.ToolTip="Export work days info to a saved file" Click="ExportButton_Click">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Export" VerticalAlignment="Center" FontSize="16"/>
+						<FontIcon Glyph="&#xEDE1;" VerticalAlignment="Center" Margin="10,0,0,0"/>
+					</StackPanel>
+				</Button>
+				<Button x:Name="ImportButton" CornerRadius="10" Margin="5,0,0,0" ToolTipService.ToolTip="Import work days from a saved file" Click="ImportButton_Click">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Import" VerticalAlignment="Center" FontSize="16"/>
+						<FontIcon Glyph="&#xEA52;" VerticalAlignment="Center" Margin="10,0,0,0"/>
+					</StackPanel>
+				</Button>
 			</StackPanel>
 		</StackPanel>
 	</Grid>

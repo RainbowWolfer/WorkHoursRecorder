@@ -11,6 +11,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Icons\Github.svg" />
     <None Remove="Views\Controls\AddTimeSpanView.xaml" />
     <None Remove="Views\Controls\DayButton.xaml" />
     <None Remove="Views\Controls\MonthSummaryView.xaml" />
@@ -18,6 +19,11 @@
     <None Remove="Views\Pages\CalendarPage.xaml" />
     <None Remove="Views\Pages\InitialPage.xaml" />
     <None Remove="Views\Pages\SettingsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Icons\Github.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +38,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="Resources\Icons\Clock-White.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Resources\Icons\Github.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

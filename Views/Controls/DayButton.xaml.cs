@@ -1,18 +1,8 @@
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using WorkHoursRecorder.Helpers;
 using WorkHoursRecorder.Models;
 
@@ -58,6 +48,11 @@ public sealed partial class DayButton : UserControl {
 	public DayButton(DateTime current) {
 		this.InitializeComponent();
 		Current = current;
+
+		if (current == DateTime.Today) {
+			DayText.FontWeight = FontWeights.Bold;
+			DayText.FontSize = 32;
+		}
 	}
 
 	private void MainButton_Click(object sender, RoutedEventArgs e) {

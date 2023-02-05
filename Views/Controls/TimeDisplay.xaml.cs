@@ -1,20 +1,7 @@
-using ABI.Windows.Foundation;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 namespace WorkHoursRecorder.Views.Controls;
 public sealed partial class TimeDisplay : UserControl {
@@ -55,7 +42,7 @@ public sealed partial class TimeDisplay : UserControl {
 					Background = new SolidColorBrush(Colors.Gray),
 					Width = 2,
 					Height = 5,
-					HorizontalAlignment=HorizontalAlignment.Center,
+					HorizontalAlignment = HorizontalAlignment.Center,
 				});
 				RootGrid.Children.Add(canvas);
 				Grid.SetColumn(canvas, h);
