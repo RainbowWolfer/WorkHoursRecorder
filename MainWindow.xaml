@@ -1,0 +1,60 @@
+<Window
+    x:Class="WorkHoursRecorder.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WorkHoursRecorder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Grid x:Name="RootGrid" Background="{StaticResource AppCommonBackground}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--<Grid RowDefinitions="Auto,*" Background="{StaticResource AppCommonBackground}">-->
+
+		<Grid x:Name="AppTitleBar" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Top" Canvas.ZIndex="1">
+			<Image x:Name="AppTitleIcon" Source="/Resources/Icons/Clock-White.png" HorizontalAlignment="Left" Width="16" Height="16" Margin="8,0"/>
+			<TextBlock x:Name="AppTitleTextBlock" Text="Work Hour Recorder" TextWrapping="NoWrap" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center" Margin="32,0,0,0"/>
+		</Grid>
+		<Grid Grid.Row="1">
+			<NavigationView x:Name="RootNavigation" PaneDisplayMode="Top" SelectionChanged="RootNavigation_SelectionChanged" IsEnabled="False">
+				<NavigationView.MenuItems>
+					<NavigationViewItem Icon="Calendar" Content="Calendar" Tag="0"/>
+				</NavigationView.MenuItems>
+				<NavigationView.PaneFooter>
+					<StackPanel Orientation="Horizontal">
+						<Button x:Name="CalculateButton" Height="30" Margin="0,0,10,0" ToolTipService.ToolTip="Calculate month work time" Click="CalculateButton_Click">
+							<StackPanel Orientation="Horizontal">
+								<FontIcon Glyph="&#xF5B0;"/>
+								<TextBlock Text="Summary" Margin="10,0,0,0" FontSize="14"/>
+							</StackPanel>
+						</Button>
+						<Border Background="Gray" CornerRadius="1.5" Height="20" Width="3" Margin="0,0,10,0"/>
+						<Button x:Name="ReturnMonthButton" Height="30" Margin="0,0,10,0" ToolTipService.ToolTip="Return to current month" Click="ReturnMonthButton_Click">
+							<FontIcon Glyph="&#xE184;"/>
+						</Button>
+						<Button x:Name="PreviousMonthButton" Height="30" Margin="0,0,10,0" ToolTipService.ToolTip="Previous month" Click="PreviousMonthButton_Click">
+							<FontIcon Glyph="&#xE0E2;"/>
+						</Button>
+						<Button x:Name="NextMonthButton" Height="30" Margin="0,0,10,0" ToolTipService.ToolTip="Next month" Click="NextMonthButton_Click">
+							<FontIcon Glyph="&#xE0E3;"/>
+						</Button>
+						<DatePicker x:Name="MainDatePicker" YearVisible="True" MonthVisible="True" DayVisible="False" SelectedDateChanged="MainDatePicker_SelectedDateChanged"/>
+					</StackPanel>
+				</NavigationView.PaneFooter>
+				<NavigationView.Content>
+					<Frame x:Name="MainFrame">
+						<Frame.ContentTransitions>
+							<TransitionCollection>
+								<NavigationThemeTransition/>
+							</TransitionCollection>
+						</Frame.ContentTransitions>
+					</Frame>
+				</NavigationView.Content>
+			</NavigationView>
+		</Grid>
+	</Grid>
+</Window>

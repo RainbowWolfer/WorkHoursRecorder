@@ -1,0 +1,18 @@
+<UserControl
+    x:Class="WorkHoursRecorder.Views.Controls.TimeDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WorkHoursRecorder.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<UserControl.Resources>
+
+	</UserControl.Resources>
+
+	<Grid x:Name="RootGrid">
+        
+	</Grid>
+
+</UserControl>
