@@ -44,6 +44,11 @@ public static class Local {
 		return Info?.GetWorkDaysInMonth(year, month) ?? new List<Pair<Date, List<WorkTimeSpan>>>();
 	}
 
+	public static async Task Update(WorkDayInfo? info) {
+		Info = info;
+		await Save();
+	}
+
 	public static async Task Save() {
 		string json = JsonConvert.SerializeObject(Info, Formatting.Indented);
 		await FileIO.WriteTextAsync(await GetFile(), json);
@@ -66,7 +71,13 @@ public static class Local {
 		return JsonConvert.SerializeObject(Info, Formatting.Indented);
 	}
 
-	public static WorkDayInfo? JsonToInfo(string json) {
-		return JsonConvert.DeserializeObject<WorkDayInfo?>(json);
+	public static WorkDayInfo? JsonToInfo(string json, out Exception? exception) {
+		try {
+			exception = null;
+			return JsonConvert.DeserializeObject<WorkDayInfo?>(json);
+		} catch (Exception ex) {
+			exception = ex;
+			return null;
+		}
 	}
 }

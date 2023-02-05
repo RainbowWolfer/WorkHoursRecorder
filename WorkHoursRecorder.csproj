@@ -14,6 +14,7 @@
     <None Remove="Resources\Icons\Github.svg" />
     <None Remove="Views\Controls\AddTimeSpanView.xaml" />
     <None Remove="Views\Controls\DayButton.xaml" />
+    <None Remove="Views\Controls\ImportErrorView.xaml" />
     <None Remove="Views\Controls\MonthSummaryView.xaml" />
     <None Remove="Views\Controls\TimeSpanItemView.xaml" />
     <None Remove="Views\Pages\CalendarPage.xaml" />
@@ -43,6 +44,12 @@
     <Content Update="Resources\Icons\Github.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Controls\ImportErrorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

@@ -22,6 +22,7 @@ public sealed partial class MainWindow : Window {
 		SetTitleBar(AppTitleBar);
 
 		MainFrame.Navigate(typeof(InitialPage), null, new EntranceNavigationTransitionInfo());
+
 	}
 
 	public void SetIcon(ApplicationTheme theme) {

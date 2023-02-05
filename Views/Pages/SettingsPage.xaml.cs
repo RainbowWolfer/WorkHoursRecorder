@@ -1,3 +1,4 @@
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
@@ -5,7 +6,10 @@ using System.Diagnostics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
+using WinRT.Interop;
 using WorkHoursRecorder.Helpers;
+using WorkHoursRecorder.Models;
+using WorkHoursRecorder.Views.Controls;
 
 namespace WorkHoursRecorder.Views.Pages;
 public sealed partial class SettingsPage : Page {
@@ -16,13 +20,23 @@ public sealed partial class SettingsPage : Page {
 
 	}
 
-	private async void ExportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+	private async void ExportButton_Click(object sender, RoutedEventArgs e) {
+		ExportButton.IsEnabled = false;
+
 		string json = Local.InfoToJson();
 		FileSavePicker savePicker = new() {
 			SuggestedFileName = $"WorkDaysInfo",
 		};
-		savePicker.FileTypeChoices.Add("Json File", new List<string>() { ".json" }); 
+		savePicker.FileTypeChoices.Add("Json File", new List<string>() { ".json" });
 
+		// Retrieve the window handle (HWND) of the current WinUI 3 window.
+		MainWindow? window = (Application.Current as App)?.MainWindow;
+		IntPtr hWnd = WindowNative.GetWindowHandle(window);
+
+		// Initialize the folder picker with the window handle (HWND).
+		InitializeWithWindow.Initialize(savePicker, hWnd);
+
+		// Display the file picker dialog by calling PickSaveFileAsync
 		StorageFile file = await savePicker.PickSaveFileAsync();
 		if (file != null) {
 			// Prevent updates to the remote version of the file until
@@ -42,9 +56,52 @@ public sealed partial class SettingsPage : Page {
 		} else {
 			Debug.WriteLine($"User cancelled the save dialog.");
 		}
+
+		ExportButton.IsEnabled = true;
 	}
 
-	private void ImportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+	private async void ImportButton_Click(object sender, RoutedEventArgs e) {
+		ImportButton.IsEnabled = false;
+		FileOpenPicker openPicker = new() {
 
+		};
+		openPicker.FileTypeFilter.Clear();
+		openPicker.FileTypeFilter.Add(".json");
+
+		// Retrieve the window handle (HWND) of the current WinUI 3 window.
+		MainWindow? window = (Application.Current as App)?.MainWindow;
+		IntPtr hWnd = WindowNative.GetWindowHandle(window);
+
+		// Initialize the folder picker with the window handle (HWND).
+		InitializeWithWindow.Initialize(openPicker, hWnd);
+
+		StorageFile file = await openPicker.PickSingleFileAsync();
+		if (file != null) {
+			string json = await FileIO.ReadTextAsync(file);
+			WorkDayInfo? obj = Local.JsonToInfo(json, out Exception? exception);
+			if (obj != null && exception == null) {
+				ContentDialog dialog = new() {
+					XamlRoot = this.XamlRoot,
+					Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+					Title = "Import file",
+					PrimaryButtonText = "Yes",
+					CloseButtonText = "No",
+					Content = "Are you sure to override your existing info by imported file?",
+				};
+				if (await dialog.ShowAsync() == ContentDialogResult.Primary) {
+					await Local.Update(obj);
+				}
+			} else {
+				ContentDialog dialog = new() {
+					XamlRoot = this.XamlRoot,
+					Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+					Title = "Error occured",
+					CloseButtonText = "Back",
+					Content = new ImportErrorView(exception),
+				};
+				await dialog.ShowAsync();
+			}
+		}
+		ImportButton.IsEnabled = true;
 	}
 }
