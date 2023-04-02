@@ -69,6 +69,7 @@ public sealed partial class CalendarPage : Page {
 				startColumn = 0;
 				row++;
 			}
+			AdditionalRow.Height = new GridLength(row >= 5 ? 1 : 0, GridUnitType.Star);
 		}
 	}
 

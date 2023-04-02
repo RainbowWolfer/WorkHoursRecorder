@@ -115,6 +115,7 @@
 							<RowDefinition Height="*"/>
 							<RowDefinition Height="*"/>
 							<RowDefinition Height="*"/>
+							<RowDefinition Height="*" x:Name="AdditionalRow"/>
 						</Grid.RowDefinitions>
 
 					</Grid>
